@@ -1,7 +1,7 @@
 <%-- 
     Document   : index
     Created on : 17/07/2016, 02:54:27 PM
-    Author     : usuario
+    Author     : Joel Torres
 --%>
 <%@page language="java" contentType="text/html" pageEncoding="UTF-8"%>
 
