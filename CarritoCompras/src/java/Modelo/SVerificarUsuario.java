@@ -48,7 +48,7 @@ public class SVerificarUsuario extends HttpServlet {
 
             if ("jtorres".equals(u.getUsuario_user())) {
                 //El usuario tiene el privilegio de cliente
-                response.sendRedirect("MostrarProductos.jsp");
+                response.sendRedirect("index.jsp");
             } else {
                 //El usuario tiene el privilegio de empleado de la empresa
                 response.sendRedirect("MostrarProductosEmpelado.jsp");
