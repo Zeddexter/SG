@@ -8,8 +8,12 @@ package Modelo;
 import Controlador.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -34,34 +38,26 @@ public class RegistrarUsuario extends HttpServlet {
             throws ServletException, IOException {
         try {
             Usuario usr = new Usuario();
-            if(request.getParameter("txtcodUsuario").trim().length()!=0 )
-            {
+            if (request.getParameter("txtcodUsuario").trim().length() != 0) {
                 usr.setUsuario_codigo(Integer.parseInt(request.getParameter("txtcodUsuario")));
             }
-            
+
             usr.setUsuario_nombre(request.getParameter("txtNombres").trim());
             usr.setUsuario_apellido(request.getParameter("txtApellidos").trim());
             usr.setUsuario_user(request.getParameter("txtUsuario").trim());
             usr.setUsuario_clave(request.getParameter("txtClave").trim());
             usr.setEmail(request.getParameter("txtEmail").trim());
-            //usr.setUsrcre(request.getParameter("txtusrcre").trim());
-            //usr.setUsrmod(request.getParameter("txtUsrmod").trim());
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
             usr.setUsrcre("JTORRES");
-           // Date date = formatter.parse("28/07/2016");
-           // usr.setFeccre((java.sql.Date) date);
-
-            //if (request.getParameter("txtFeccre").trim() != null || request.getParameter("txtFeccre").trim() != "") {
-            //    Date date = formatter.parse(request.getParameter("txtFeccre").trim());
-            //    usr.setFeccre((java.sql.Date) date);
-            //}
-            //if (request.getParameter("txtFecmod").trim() != null || request.getParameter("txtFecmod").trim() != "") {
-            //    Date date = formatter.parse(request.getParameter("txtFecmod").trim());
-            //    usr.setFecmod(((java.sql.Date) date));
-            //}
+            
+            
             usr.Registrar();
-
-        } catch (Exception e) {
+            request.setAttribute("Res", "Se ha registrado con éxito ");
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/Respuesta.jsp");
+            rd.forward(request, response);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 

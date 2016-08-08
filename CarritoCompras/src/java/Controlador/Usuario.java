@@ -16,8 +16,8 @@ public class Usuario {
     private String email;
     private String usrcre;
     private String usrmod;
-    private Date feccre;
-    private Date fecmod;
+    private String feccre;
+    private String fecmod;
 
     /**
      * Crea un nueva instancia de la clase usuario
@@ -70,26 +70,28 @@ public class Usuario {
         return u;
     }
 
-    public boolean Registrar() {
+    public boolean Registrar() throws SQLException {
         boolean registro = false;
         try {
-            Connection cn = null;
-            CallableStatement proc
-                    = cn.prepareCall("{ call setsg_usuarios(?,?,?,?,?,?,?,?,?,?) }");
-            proc.setInt(1, usuario_Codigo);
-            proc.setString(2, usuario_Nombre);
-            proc.setString(3, usuario_Apellido);
-            proc.setString(4, usuario_User);
-            proc.setString(5, usuario_Clave);
             
-            proc.setString(6, getUsrcre());
-            proc.setString(7, getUsrmod());
-            proc.setDate(8, getFeccre());
-            proc.setDate(9, getFecmod());
-            proc.setString(10, email);
-            proc.execute();
-
+            Connection cn = null;
+            CallableStatement proc = null;
+            cn = Conexion.getConexion();
+            proc = cn.prepareCall("{ call setsg_usuarios(?,?,?,?,?,?,?)}");
+           // proc.setInt(1, usuario_Codigo);
+            proc.setString(1, usuario_Nombre);
+            proc.setString(2, usuario_Apellido);
+            proc.setString(3, usuario_User);
+            proc.setString(4, usuario_Clave);
+            proc.setString(5,usrcre);
+            proc.setString(6, usrmod);
+            proc.setString(7, email);
+            proc.executeUpdate();
+            registro = true;
+            return registro;
         } catch (Exception e) {
+              System.err.println("Error!");
+            System.err.println(e.getMessage());
         }
 
         return registro;
@@ -166,14 +168,14 @@ public class Usuario {
     /**
      * @return the feccre
      */
-    public Date getFeccre() {
+    public String getFeccre() {
         return feccre;
     }
 
     /**
      * @return the fecmod
      */
-    public Date getFecmod() {
+    public String getFecmod() {
         return fecmod;
     }
 
@@ -187,14 +189,14 @@ public class Usuario {
     /**
      * @param feccre the feccre to set
      */
-    public void setFeccre(Date feccre) {
+    public void setFeccre(String feccre) {
         this.feccre = feccre;
     }
 
     /**
      * @param fecmod the fecmod to set
      */
-    public void setFecmod(Date fecmod) {
+    public void setFecmod(String fecmod) {
         this.fecmod = fecmod;
     }
 
