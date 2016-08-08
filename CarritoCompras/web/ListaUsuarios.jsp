@@ -4,6 +4,8 @@
     Author     : usuario
 --%>
 
+<%@page import="Controlador.Usuario"%>
+<%@page import="java.util.Vector"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -19,6 +21,7 @@
         <div class="panel panel-primary" >
             <div class="panel panel-heading" >Usuarios</div>
             <div class="panel panel-body" >
+                <a href="Usuarios.jsp" class="btn btn-primary" >Crear nuevo</a>
                 <table  class="table">
                     <thead>
                         <tr>
@@ -38,7 +41,18 @@
                                 
                             </th>
                         </tr>
-                        
+                        <%
+                                            Vector v = new Vector();
+                                            Usuario usuario = new Usuario();
+                                            v = usuario.listaUsuarios();
+                                            
+                                            if (v.size() > 0) {
+                                                for (int i = 0; i < v.size(); i++) {
+                                                    usuario = (Usuario) v.get(i);
+                                                    out.print("<tr><td>" + usuario.getUsuario_nombre() + "</td><td>" + usuario.getUsuario_apellido() + "</td><td>"+usuario.getUsuario_user()+ "</td><td>"+usuario.getEmail()+"</td></tr>" );
+                                                }
+                                            }
+                                    %>
                     </thead>
                 </table>
             </div>

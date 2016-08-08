@@ -1,6 +1,7 @@
 package Controlador;
 
 import java.sql.*;
+import java.util.Vector;
 
 /**
  *
@@ -95,6 +96,42 @@ public class Usuario {
         }
 
         return registro;
+    }
+    
+    public Vector<Usuario> listaUsuarios()
+    {
+      Vector<Usuario> lp=new Vector<Usuario>();
+        Connection cn=null;
+        PreparedStatement pr=null;
+        ResultSet rs=null;
+        try{
+            cn=Conexion.getConexion();
+            String sql="SELECT * FROM Usuario";
+            pr=cn.prepareStatement(sql);
+            rs=pr.executeQuery();
+            while(rs.next()){
+                Usuario usuario=new Usuario();
+                usuario.setUsuario_codigo(rs.getInt("coduser"));
+                usuario.setUsuario_nombre(rs.getString("nombres"));
+                usuario.setUsuario_apellido(rs.getString("apellidos"));
+                usuario.setUsuario_user(rs.getString("usuario"));
+                usuario.setEmail(rs.getString("email"));
+                lp.add(usuario);
+            }
+        }catch(SQLException ex){
+            ex.printStackTrace();
+            lp=null;
+        }finally{
+            try{
+                rs.close();
+                pr.close();
+                cn.close();
+            }catch(SQLException ex){
+                ex.printStackTrace();
+            }
+        }
+        return lp;
+     
     }
 
     /**

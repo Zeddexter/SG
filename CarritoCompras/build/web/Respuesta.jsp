@@ -20,7 +20,7 @@
                 <div class="panel panel-heading" >Mensaje</div>
                 <div class="panel panel-body" >
                     <section><h3><%= request.getAttribute("Res")%></h3></section>
-                    <a href="Usuarios.jsp" class="btn btn-primary">Regresar</a>
+                    <a href="ListaUsuarios.jsp" class="btn btn-primary">Regresar</a>
                 </div>
             </div>
     </body>
