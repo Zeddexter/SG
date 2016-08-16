@@ -107,7 +107,7 @@
                             <%} else {
                             %>
                             <li><p class="navbar-text">
-                                    Bienvenido <%= session.getAttribute("usuario")%>
+                                    Bienvenid@ <%= session.getAttribute("usuario")%>
                                     <a href='logout.jsp'>Desconectarse</a>
                                 </p></li>
                                 <%

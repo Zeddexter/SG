@@ -9,6 +9,21 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script type="text/javascript">
+            var password = document.getElementById("txtClave")
+                    , confirm_password = document.getElementById("txtclaveconfirma");
+
+            function validatePassword() {
+                if (password.value !== confirm_password.value) {
+                    confirm_password.setCustomValidity("Contraseña no coincide");
+                } else {
+                    confirm_password.setCustomValidity('');
+                }
+            }
+            password.onchange = validatePassword;
+confirm_password.onkeyup = validatePassword;
+        </script>
+
     </head>
     <jsp:include page="/WEB-INF/PAGES/TEMPLATE.jsp">
         <jsp:param name="content" value= "TEST"/>
@@ -29,12 +44,12 @@
                                     <label class="col-md-4 control-label">Código</label>  
                                     <div class="col-md-4 inputGroupContainer">
                                         <div class="input-group">
-                                           
+
                                             <input  name="txtcodUsuario" id="txtcodUsuario" class="form-control" readonly="true"  type="text">
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="form-group">
                                     <label class="col-md-4 control-label">Nombres</label>  
                                     <div class="col-md-4 inputGroupContainer">
@@ -68,7 +83,7 @@
                                     <div class="col-md-4 inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                            <input  name="txtClave" placeholder="Contraseña" class="form-control" required="true"  type="password">
+                                            <input  name="txtClave" placeholder="Contraseña" id="password" class="form-control" required="true"  type="password">
                                         </div>
                                     </div>
                                 </div>
@@ -77,7 +92,7 @@
                                     <div class="col-md-4 inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                            <input  name="txtclaveconfirma" placeholder="Confirmar Contraseña" required="true" class="form-control"  type="password">
+                                            <input  name="txtclaveconfirma" id="confirm_password" placeholder="Confirmar Contraseña" required="true" class="form-control"  type="password">
                                         </div>
                                     </div>
                                 </div>
@@ -94,11 +109,11 @@
                                 <div class="form-group">
                                     <div class="col-md-4 inputGroupContainer">
                                         <div class="input-group">
-                                          <input class="btn btn-primary " type="submit" name="btnRegistrar" value="Registrar"  />
+                                            <input class="btn btn-primary " type="submit" name="btnRegistrar" value="Registrar"  />
                                         </div>
                                     </div>
                                 </div>
-                                
+
                             </form>
 
                         </div>
